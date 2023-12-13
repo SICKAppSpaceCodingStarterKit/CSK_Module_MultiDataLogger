@@ -1,15 +1,13 @@
 # CSK_Module_MultiDataLogger
-## INFO: Draft version. Not further developed / tested so far! Check for available GitHub forks of this repository to see latest updates.
 
 Module to store data like files (json, csv) or images.
 
-*If available, please also add a screenshot/gif of the UI of the module here placed within /docu/media/ (see code)*
 ![](./docu/media/UI_Screenshot.png)
 
 ## How to Run
 
-[***...please fill with informations...***]  
-For further information check out the [documentation](https://raw.githack.com/SICKAppSpaceCodingStarterKit/CSK_Module_MultiDataLogger/main/docu/CSK_Module_MultiDataLogger.html) in the folder "docu".
+The app includes an intuitive GUI to setup the data logger.  
+For further information check out the [documentation](https://raw.githack.com/golluroSICKAG/CSK_Module_MultiDataLogger/main/docu/CSK_Module_MultiDataLogger.html) in the folder "docu".
 
 ## Information
 
@@ -18,7 +16,6 @@ Tested on:
 |--|--|--|
 |SICK AppEngine|V0.0.0|V0.1.0|
 ...
-
 
 This application / module is part of the SICK AppSpace Coding Starter Kit developing approach.  
 It is programmed in an object oriented way. Some of the modules use kind of "classes" in Lua to make it possible to reuse code / classes in other projects.  
