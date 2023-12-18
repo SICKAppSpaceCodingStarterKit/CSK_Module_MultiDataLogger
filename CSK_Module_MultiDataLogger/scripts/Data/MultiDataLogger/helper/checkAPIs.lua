@@ -6,10 +6,13 @@
 local availableAPIs = {}
 
 local function loadAPIs()
-  CSK_ModuleName = require 'API.CSK_ModuleName'
+  CSK_MultiDataLogger = require 'API.CSK_MultiDataLogger'
 
   Container = require 'API.Container'
+  DateTime = require 'API.DateTime'
   Engine = require 'API.Engine'
+  File = require 'API.File'
+  Image = require 'API.Image'
   Log = require 'API.Log'
   Log.Handler = require 'API.Log.Handler'
   Log.SharedLogger = require 'API.Log.SharedLogger'
