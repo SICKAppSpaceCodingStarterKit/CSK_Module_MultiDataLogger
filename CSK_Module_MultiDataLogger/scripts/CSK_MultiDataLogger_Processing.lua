@@ -15,9 +15,6 @@ local scriptParams = Script.getStartArgument() -- Get parameters from model
 local multiDataLoggerInstanceNumber = scriptParams:get('multiDataLoggerInstanceNumber') -- number of this instance
 local multiDataLoggerInstanceNumberString = tostring(multiDataLoggerInstanceNumber) -- number of this instance as string
 
--- Event to notify result of processing
---TODO
---Script.serveEvent("CSK_MultiDataLogger.OnNewResult" .. multiDataLoggerInstanceNumberString, "MultiDataLogger_OnNewResult" .. multiDataLoggerInstanceNumberString, 'bool') -- Edit this accordingly
 -- Event to forward content from this thread to Controller to show e.g. on UI
 Script.serveEvent("CSK_MultiDataLogger.OnNewValueToForward".. multiDataLoggerInstanceNumberString, "MultiDataLogger_OnNewValueToForward" .. multiDataLoggerInstanceNumberString, 'string, auto')
 -- Event to forward update of e.g. parameter update to keep data in sync between threads
@@ -42,45 +39,37 @@ local dataArray = {}
 
 --- Function to save temp log to file
 local function saveCSVLog()
-  --local success = File.isdir(processingParams.path)
 
   local success
-  --if success then
-    --local completeFilepath = dataLogger_Model.parameters.savingFilePath .. dataLogger_Model.parameters.savingFileName
-    local completeFilepath = processingParams.path .. processingParams.csvFilename .. '.csv'
+  local completeFilepath = processingParams.path .. processingParams.csvFilename .. '.csv'
 
-    if not File.exists(completeFilepath) then
-      local data = processingParams.csvLabels .. "\n"
-      local newFile = File.open(completeFilepath, "wb")
+  if not File.exists(completeFilepath) then
+    local data = processingParams.csvLabels .. "\n"
+    local newFile = File.open(completeFilepath, "wb")
 
-      if (newFile ~= nil) then
-        success = File.write(newFile, data)
-        --_G.logger:info(nameOfModule .. ": Success of writing data file = " .. tostring(success))
-        File.close(newFile)
-      else
-        _G.logger:warning(nameOfModule .. ": Did not work to create data file.")
-      end
+    if (newFile ~= nil) then
+      success = File.write(newFile, data)
+      File.close(newFile)
+    else
+      _G.logger:warning(nameOfModule .. ": Did not work to create data file.")
     end
+  end
 
-    local data = ''
-    for i = 1, #dataArray do
-      for k, v in pairs(dataArray[i]) do
-        data = data .. tostring(k)
-        data = data .. "," .. v
-        data = data .. "\n"
-      end
+  local data = ''
+  for i = 1, #dataArray do
+    for k, v in pairs(dataArray[i]) do
+      data = data .. tostring(k)
+      data = data .. "," .. v
+      data = data .. "\n"
     end
+  end
 
-    local file = File.open(completeFilepath, "ab")
-    if (file ~= nil) then
-      success = File.write(file, data)
-      --_G.logger:info(nameOfModule .. ": Success of data save = " .. tostring(success)) -- for debugging
-      File.close(file)
-      dataArray = {}
-    end
-  --else
-  --  _G.logger:warning(nameOfModule .. ": Saving location not available: " .. dataLogger_Model.parameters.savingFilePath)
-  --end
+  local file = File.open(completeFilepath, "ab")
+  if (file ~= nil) then
+    success = File.write(file, data)
+    File.close(file)
+    dataArray = {}
+  end
 end
 
 local function handleOnNewProcessing(dataContent, filename)
@@ -88,9 +77,8 @@ local function handleOnNewProcessing(dataContent, filename)
   _G.logger:fine(nameOfModule .. ": Check object on instance No." .. multiDataLoggerInstanceNumberString)
 
   if processingParams.dataMode == 'file' then
+    local dataAsString = tostring(dataContent)
     if processingParams.dataType == 'csv' then
-      --TODO
-      local dataAsString = tostring(dataContent)
 
       -- Check change of data
       if dataAsString ~= latestValue or not processingParams.saveOnlyChanges then
@@ -118,7 +106,7 @@ local function handleOnNewProcessing(dataContent, filename)
         local timestamp = tostring(DateTime.getTimestamp())
         tempFile = File.open(processingParams.path .. 'Data_' .. timestamp .. '.' .. processingParams.dataType, 'wb' )
       end
-      File.write(tempFile, dataContent)
+      File.write(tempFile, dataAsString)
       File.close(tempFile)
     end
   elseif processingParams.dataMode == 'image' then
@@ -139,7 +127,6 @@ local function handleOnNewProcessing(dataContent, filename)
     end
   end
 end
-Script.serveFunction("CSK_MultiDataLogger.processInstance"..multiDataLoggerInstanceNumberString, handleOnNewProcessing, 'object:?:Alias', 'bool:?') -- Edit this according to this function
 
 --- Function to handle updates of processing parameters from Controller
 ---@param multiDataLoggerNo int Number of instance to update

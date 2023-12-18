@@ -179,6 +179,37 @@ local function createFolder(path)
 end
 funcs.createFolder = createFolder
 
+local function getAvailableEvents()
+  local listOfEvents = {}
+
+  local appNames = Engine.listApps()
+
+  for key, value in pairs(appNames) do
+    local startPos = string.find(value, '_', 5)
+    if startPos then
+      local crownName = 'CSK' .. string.sub(value, startPos, #value)
+      local content = Engine.getCrownAsXML(crownName)
+      local lastSearchPos = 0
+
+      while true do
+        local _, eventStart = string.find(content, 'event name="', lastSearchPos)
+        if eventStart then
+          lastSearchPos = eventStart+1
+          local endPos = string.find(content, '"', eventStart+1)
+          if endPos then
+            local eventName = crownName .. '.' .. string.sub(content, eventStart+1, endPos-1)
+            table.insert(listOfEvents, eventName)
+          end
+        else
+          break
+        end
+      end
+    end
+  end
+  return listOfEvents
+end
+funcs.getAvailableEvents = getAvailableEvents
+
 return funcs
 
 --**************************************************************************

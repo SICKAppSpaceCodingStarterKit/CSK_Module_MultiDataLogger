@@ -288,8 +288,7 @@
 												</davinci-value-display>
 											</layout-column>
 											<layout-column id="ColumnLayout11" style="align-items: stretch">
-												<davinci-text-field id="TF_RegisteredEvent" type="text"
-													placeholder="e.g. CSK_ImagePlayer.OnNewImage">
+												<davinci-auto-suggest id="AS_RegisteredEvent" min-length="0">
 												<crown-edpws-binding property="value"
 													name="CSK_MultiDataLogger/OnNewStatusRegisteredEvent"
 													update-on-resume>
@@ -298,7 +297,11 @@
 													name="CSK_MultiDataLogger/setRegisterEvent"
 													path="param/args/event" auto-commit>
 												</crown-binding>
-												</davinci-text-field>
+												<crown-edpws-binding property="data"
+													name="CSK_MultiDataLogger/OnNewStatusAvailableEvents"
+													update-on-resume converter="convertToList">
+												</crown-edpws-binding>
+												</davinci-auto-suggest>
 											</layout-column>
 										</layout-row>
 										<layout-row id="RowLayout9">

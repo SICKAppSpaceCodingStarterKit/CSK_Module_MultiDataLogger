@@ -61,12 +61,6 @@ Typically the feature of this module is used like this (check also main script o
                 <event name="OnDataLoadedOnReboot">
                     <desc>Event to call if module tried to load parameters and should be ready.</desc>
                 </event>
-                <event name="OnNewResultNUM">
-                    <desc>Example of dynamically created event to provide result of instance. +
-NUM will be replaced by the number of instance (e.g. "OnNewResult1"). +
-INFO: Other modules can check via "Script.isServedAsEvent" if event of sepecific instance exists.</desc>
-                    <param desc="Result" multiplicity="1" name="result" type="bool"/>
-                </event>
                 <event name="OnNewParameterName">
                     <desc>Notify name of persistent data parameter.</desc>
                     <param desc="Parameter name" multiplicity="1" name="name" type="string"/>
@@ -145,6 +139,10 @@ NUM will be replaced by the number of instance (e.g. "OnNewResult1"). +</desc>
                     <desc>Notify name of CSV file to store data.</desc>
                     <param desc="Name of file." multiplicity="1" name="name" type="string"/>
                 </event>
+                <event name="OnNewStatusAvailableEvents">
+                    <desc>Notify available events.</desc>
+                    <param desc="JSON list" multiplicity="1" name="listOfEvents" type="string"/>
+                </event>
                 <function name="setParameterName">
                     <desc>Function to set the name of the parameters if saved/loaded via the CSK_PersistentData module.</desc>
                     <param desc="Name of the parameter" multiplicity="1" name="name" type="string"/>
@@ -175,14 +173,6 @@ NUM will be replaced by the number of instance (e.g. "OnNewResult1"). +</desc>
                     <desc>Configure event that this module should listen to. If this one is notified, it will be linked to internal processing function. +
 (Will be set to currently active instance, see "setSelectedObject")</desc>
                     <param desc="(external) Event name to listen to." multiplicity="1" name="event" type="string"/>
-                </function>
-                <function name="processInstanceNUM">
-                    <desc>Example of dynamically served function to process internally coded function. +
-NUM will be replaced by the number of instance (e.g. "processInstance1"). +
-INFO: Other modules can check via "Script.isServedAsFunction" if function of sepecific instance exists. +
-Needs then to be called via "Script.callFunction".</desc>
-                    <param alias="Alias" desc="Transferred object (optional)" multiplicity="?" name="object" type="object"/>
-                    <return desc="Processing result (optional)." multiplicity="?" name="result" type="bool"/>
                 </function>
                 <function name="addInstance">
                     <desc>Function to add an additional instance.</desc>
@@ -234,7 +224,7 @@ If FALSE it is needed to call 'saveLog' manually to store log data.</desc>
             </serves>
         </crown>
         <meta key="author">SICK AG</meta>
-        <meta key="version">0.1.0</meta>
+        <meta key="version">1.0.0</meta>
         <meta key="priority">low</meta>
         <meta key="copy-protected">false</meta>
         <meta key="read-protected">false</meta>
