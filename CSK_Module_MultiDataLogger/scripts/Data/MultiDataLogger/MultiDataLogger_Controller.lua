@@ -224,6 +224,8 @@ local function addInstance()
   table.insert(multiDataLogger_Instances, multiDataLogger_Model.create(#multiDataLogger_Instances+1))
   Script.deregister("CSK_MultiDataLogger.OnNewValueToForward" .. tostring(#multiDataLogger_Instances) , handleOnNewValueToForward)
   Script.register("CSK_MultiDataLogger.OnNewValueToForward" .. tostring(#multiDataLogger_Instances) , handleOnNewValueToForward)
+  Script.deregister("CSK_MultiDataLogger.OnNewValueUpdate" .. tostring(#multiDataLogger_Instances) , handleOnNewValueUpdate)
+  Script.register("CSK_MultiDataLogger.OnNewValueUpdate" .. tostring(#multiDataLogger_Instances) , handleOnNewValueUpdate)
   handleOnExpiredTmrMultiDataLogger()
 end
 Script.serveFunction('CSK_MultiDataLogger.addInstance', addInstance)
