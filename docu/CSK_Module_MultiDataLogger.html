@@ -619,7 +619,7 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 <div class="details">
 <span id="author" class="author">SICK AG</span><br>
 <span id="revnumber">version 1.0.0,</span>
-<span id="revdate">2023-12-18</span>
+<span id="revdate">2024-03-27</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -723,7 +723,7 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Date</p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2023-12-18</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2024-03-27</p></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Author</p></th>
@@ -769,14 +769,14 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 <div class="paragraph">
 <p>Module to store / log data like files or images.<br>
 <br>
-Typically the feature of this module is used like this (check also main script of this module):<br>
+Typically, the feature of this module is used like this (check also main script of this module):<br>
 <br>
 <strong>1) Setup</strong><br>
 - Set instance to configure via 'setSelectedInstance'<br>
-- Set data mode and storage path via 'setDataMode', 'setPath'.<br>
+- Set data mode and storage path via 'setDataMode' and 'setPath'.<br>
 - Set type of data or image via 'setDataType' or 'setImageType'.<br>
-- If it should store data in a csv file, you should set the csv filename via 'setCSVFilename', the csv labels via 'setCSVLabels'. Additionally choose mode for 'setSaveOnlyChanges' and 'setSaveDataDirectly'.<br>
-- Set an event to receive the data / image to store via 'setRegisterEvent'. This event should provide as first parameter the data to store and as 2nd parameter an optional filename (2nd parameter not needed if data type is 'csv'). Otherwise it will use the timestamp as filename.<br></p>
+- If it should store data in a CSV-formatted file, you should set the CSV filename via 'setCSVFilename', the CSV labels via 'setCSVLabels'. Additionally, choose mode for 'setSaveOnlyChanges' and 'setSaveDataDirectly'.<br>
+- Set an event to receive the data / image to store via 'setRegisterEvent'. This event should provide as first parameter the data to store and as second parameter an optional filename (2nd parameter not needed, if data type is 'csv'). Otherwise, it will use the timestamp as filename.<br></p>
 </div>
 </div>
 <div class="sect3">
@@ -1368,7 +1368,7 @@ IMPORTANT: As instances start their own threads, the module needs to be restarte
 <div class="sect5">
 <h6 id="_short_description_16">Short description</h6>
 <div class="paragraph">
-<p>Configure if this module should load its saved parameters at app/ device boot up.</p>
+<p>Configure if this module should load its saved parameters at app / device boot up.</p>
 </div>
 </div>
 <div class="sect5">
@@ -1823,7 +1823,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <td class="tableblock halign-left valign-top"><p class="tableblock">objectNo</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">INT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Number of the instance to receive the parameter.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Numeric identifier of the instance to receive the parameter.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">parameter</p></td>
@@ -1841,7 +1841,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <td class="tableblock halign-left valign-top"><p class="tableblock">internalObjectNo</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">INT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">?</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">If parameter is for specifici internal used object, its number.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Numeric identifier, if parameter is for specific internal used object.</p></td>
 </tr>
 </tbody>
 </table>
@@ -2537,7 +2537,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <h6 id="_short_description_41">Short description</h6>
 <div class="paragraph">
 <p>Example of dynamically created event to forward data from instance thread to Controller part of module, e.g. to forward values to UI.<br>
-NUM will be replaced by the number of instance (e.g. "OnNewResult1").<br></p>
+NUM will be replaced by the number of instance (e.g. "OnNewValueToForward1").<br></p>
 </div>
 </div>
 <div class="sect5">
@@ -2591,8 +2591,8 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect5">
 <h6 id="_short_description_42">Short description</h6>
 <div class="paragraph">
-<p>Example of dynamically created event to sync paramters between instance threads and Controller part of module.<br>
-NUM will be replaced by the number of instance (e.g. "OnNewResult1").<br></p>
+<p>Example of dynamically created event to sync parameters between instance threads and Controller part of module.<br>
+NUM will be replaced by the number of instance (e.g. "OnNewValueUpdate1").<br></p>
 </div>
 </div>
 <div class="sect5">
@@ -2623,7 +2623,7 @@ NUM will be replaced by the number of instance (e.g. "OnNewResult1").<br></p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">parameter</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the paramter to update/sync.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the parameter to update/sync.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">value</p></td>
@@ -3029,7 +3029,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <tr>
 <td class="tableblock halign-left valign-top"><div class="literal"><pre>msgpack</pre></div></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">msgpack</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MSPACK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MSGPACK</p></td>
 </tr>
 </tbody>
 </table>
@@ -3040,7 +3040,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0<br>
-Last updated 2023-12-18 16:23:55 +0100
+Last updated 2024-03-27 09:27:28 +0100
 </div>
 </div>
 <script type="text/javascript">
